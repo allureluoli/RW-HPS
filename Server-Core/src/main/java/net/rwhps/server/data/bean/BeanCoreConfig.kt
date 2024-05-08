@@ -95,7 +95,7 @@ data class BeanCoreConfig(
         try {
             val field: Field = ReflectionUtils.findField(this::class.java, name) ?: return false
             field.isAccessible = true
-            if (value is String){
+            if (name == "port" && value is String){
                 field[this]  = value.toInt()
             }
             else{
