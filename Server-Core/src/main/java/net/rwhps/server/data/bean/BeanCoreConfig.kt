@@ -95,7 +95,12 @@ data class BeanCoreConfig(
         try {
             val field: Field = ReflectionUtils.findField(this::class.java, name) ?: return false
             field.isAccessible = true
-            field[this] = value
+            if (value is String){
+                field[this]  = value.toInt()
+            }
+            else{
+                field[this] = value
+            }
             field.isAccessible = false
         } catch (e: Exception) {
             error("Cover Gameover error", e)
